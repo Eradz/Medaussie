@@ -3,6 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const menuItems =  [
+  {name: "Home", link:"/"},
+  {name: "About", link:"/about"},
+  {name: "Exams", link:"/"},
+  {name: "Licensing", link:"/about"},
+  {name: "Resources", link:"/about"},
+
+]
 function Mobilenav() {
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,20 +19,11 @@ function Mobilenav() {
     setMenuOpen(!menuOpen);
   };
 
-  const menuItems =  [
-    {name: "Home", link:"/"},
-    {name: "About", link:"/about"},
-    {name: "Exams", link:"/"},
-    {name: "Licensing", link:"/about"},
-    {name: "Resources", link:"/about"},
-
-]
-
   return (
-    <div className="bg-primary md:hidden flex px-8 ">
+    <div className="bg-primary md:hidden flex px-8 py-4 ">
       <div className="flex w-full items-center justify-between">
       <Link href="/">
-          <p className="font-bold text-secondary text-[32px]">Medaussie</p>
+          <p className="font-bold text-secondary text-[18px]"><i>Medaussie</i></p>
         </Link>
         <div onClick={toggleMenu}>
           <svg
