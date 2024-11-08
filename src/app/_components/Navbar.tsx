@@ -15,13 +15,13 @@ const navLinks = [
 ]
 function Navbar() {
   return (
-    <div className="hidden lg:block px-[4rem] bg-primary">
+    <div className="hidden lg:block px-[8%] py-[5px] bg-primary">
       <div className="flex justify-between items-center">
         <Link href="/">
           <p className="font-bold text-secondary">Medaussie</p>
         </Link>
         <div>
-          <ul className="flex gap-8 font-aeonik items-center font-[250] text-[18px] text-dark">
+          <ul className="flex gap-8 font-aeonik items-center font-[250] text-[16px] text-dark">
                 {navLinks.map((navLink)=>{
                     return(
                         <Link href={navLink.link} key={navLink.name}>
@@ -36,7 +36,7 @@ function Navbar() {
                 Sign Up
               </Link>
               <Link href="login">
-                <button className="bg-[#072D6B] p-[10px] w-[168px] rounded-[8px] text-light text-[16px]">
+                <button className="bg-secondary text-primary p-2 w-[168px] rounded-[8px] text-light text-[16px]">
                   Sign In
                 </button>
               </Link>
