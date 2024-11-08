@@ -7,11 +7,11 @@ const jobs= [
 ]
 const Professions = () => {
   return (
-    <div className='bg-secondary text-black flex flex-col gap-5 justify-center items-center px-[10%] h-[500px]'>
-        <h3 className='text-[40px] font-bold'>Overview of Medical and Allied Medical
+    <div className='bg-primary flex flex-col gap-5 justify-center items-center px-[8%] h-[500px]'>
+        <h3>Overview of Medical and Allied Medical
         Professions in Australia</h3>
         <p className='text-[18px] font-thin'>Navigating the path to a medical career in Australia as an international graduate can be complex. This guide provides a comprehensive overview of the eligibility criteria, exam requirements, and conversion procedures for international medical licenses.</p>
-        <div className='flex w-full gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-3 w-full gap-4'>
             {jobs.map((job)=>{
                 return(
                     <div key={job.name} className='flex flex-col gap-4'>
