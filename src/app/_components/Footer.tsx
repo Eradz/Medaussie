@@ -8,7 +8,6 @@ const footerDetails =[
     {name: "Exams", link:"/exam"},
     {name: "Licensing", link:"/license"},
     {name: "Resources", link:"/resource"},
-    // {name: "Jobs", link:"/contact"},
 ]},
   {name: "Contacts Details", links: [
     {name: "medaussie@gmail.com", link:"mailto:medaussie@gmail.com"},
@@ -27,7 +26,7 @@ const Footer = () => {
   return (
     <div className='text-primary flex flex-col items-center py-2'>
    <div className='flex flex-col md:flex-row gap-8 justify-between w-full p-[5%] '>
-    {footerDetails.map(({name, links}, i)=>{
+    {footerDetails.map(({name, links})=>{
       return(
         <div key={name}>
           <h3>{name}</h3>
