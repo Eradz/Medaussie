@@ -1,21 +1,17 @@
 "use client";
-// import Image from "next/image";
 import Link from "next/link";
-// import Logo from "/public/assests/Logo.png";
 
 
 const navLinks = [
     {name: "Home", link:"/"},
     {name: "About", link:"/about"},
-    {name: "Exams", link:"/"},
-    {name: "Licensing", link:"/about"},
-    {name: "Resources", link:"/about"},
-    // {name: "Jobs", link:"/contact"},
-
+    {name: "Exams", link:"/exam"},
+    {name: "Licensing", link:"/license"},
+    {name: "Resources", link:"/resource"},
 ]
 function Navbar() {
   return (
-    <div className="hidden lg:block px-[8%] py-[5px] bg-primary w-screen z-20 absolute left-0 top-0">
+    <div className="hidden lg:block px-[8%] py-[5px] bg-primary">
       <div className="flex justify-between items-center">
         <Link href="/">
           <p className="font-bold text-secondary text-[20px]">Medaussie</p>
