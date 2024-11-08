@@ -10,15 +10,15 @@ const navLinks = [
     {name: "Exams", link:"/"},
     {name: "Licensing", link:"/about"},
     {name: "Resources", link:"/about"},
-    {name: "Jobs", link:"/contact"},
+    // {name: "Jobs", link:"/contact"},
 
 ]
 function Navbar() {
   return (
-    <div className="hidden lg:block px-[8%] py-[5px] bg-primary">
+    <div className="hidden lg:block px-[8%] py-[5px] bg-primary w-screen z-20 absolute left-0 top-0">
       <div className="flex justify-between items-center">
         <Link href="/">
-          <p className="font-bold text-secondary">Medaussie</p>
+          <p className="font-bold text-secondary text-[20px]">Medaussie</p>
         </Link>
         <div>
           <ul className="flex gap-8 font-aeonik items-center font-[250] text-[16px] text-dark">
