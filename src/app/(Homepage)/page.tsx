@@ -10,9 +10,11 @@ import Services from "./_components/Services";
 
 export default function Home() {
   return (
-  <div className="relative">
+    <div className='relative'>
+    <div className='w-full fixed top-0 left-0 z-40'>
     <Mobilenav/>
     <Navbar/>
+    </div>
     <Hero/>
     <Services/>
     <Professions/>
