@@ -3,6 +3,8 @@
 import React, {useState} from 'react'
 import Link from "next/link"
 import GoogleIcon from '../../../components/icons/GoogleIcon';
+import EyeHideIcon from '../../../components/icons/EyeHideIcon';
+import EyeShowIcon from '../../../components/icons/EyeShowIcon';
 
 const Page = () => {
     // fetch("https")
@@ -11,46 +13,44 @@ const Page = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
-    // const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
         {type: "text", name: "Firstname", placeholder: "Enter your Firstname", value: firstname, edit: (value: string)=>{setFirstname(value)}},
         {type: "text", name: "Lastname", placeholder: "Enter your Lastname", value: lastname, edit: (value: string)=>{setLastname(value)}},
-        {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
-        {type: "password", name: "Confirm Password", placeholder: "Enter your Password", value: confirmPassword, edit: (value: string)=>{setConfirmPassword(value)}},
+        {type: showPassword ? "text" : "password" , name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
+        {type: showPassword ? "text" : "password" , name: "Confirm Password", placeholder: "Enter your Password", value: confirmPassword, edit: (value: string)=>{setConfirmPassword(value)}},
     ]
     return (
     <div className="flex justify-center items-center px-4 py-14 bg-primary">
         <div className="flex shadow-2xl w-[90%] ">
-            <div className="flex flex-col p-4 justify-center items-center gap-6 w-[60%]">
+            <div className="flex flex-col p-4 justify-center items-center gap-6 w-full md:w-[60%]">
             <div>
             <h1 className="text-[24px] font-semibold text-secondary">
-            Account Login
+            Register Account
             </h1>
-            <p className="text-[14px]  text-center">
-             Welcome Back!
-            </p>
           </div>
           <form className="flex flex-col w-[80%] gap-6 ">
-            {details.map(({name, value, type, placeholder, edit})=>{
+            {details.map(({name, value, type, placeholder, edit}, i)=>{
                 return (     
               <div className= 'w-full relative' key={name}>
                    <label className="text-[14px]">{name}</label>
                    <input 
                    type={type}
                    name={name}
-                   className={"w-full p-3 rounded-lg border-solid border-secondary border-[1px] focus:outline-none focus:ring-2 focus:ring-blue-500 " }
+                   className={"w-full p-3 rounded-lg border-solid border-secondary border-[1px] focus:outline-none focus:ring-2 focus:ring-blue-500 relative" }
                    placeholder={placeholder}
                    value={value}
                    onChange={(e)=>edit(e.target.value)}
                    ></input>
+                   {
+                    showPassword ? <EyeHideIcon onClick={()=> setShowPassword(false)} className={i > 2 ? 'absolute right-5 top-[50%]' : "hidden"}/> : <EyeShowIcon onClick={()=> setShowPassword(true)} className={i > 2 ? 'absolute right-5 top-[50%]' : "hidden"}/>
+                   }
                 </div>
                 )
             })}
           </form>
-          <div className='w-full text-right px-14'>
-          <Link href="">Forgot Password?</Link>
-          </div>
           <div className="py-6 flex flex-col justify-center items-center gap-4 w-full">
           <button
               type="submit"
