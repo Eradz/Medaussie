@@ -3,12 +3,14 @@
 import React, {useState} from 'react'
 import Link from "next/link"
 import GoogleIcon from '../../../components/icons/GoogleIcon';
+import EyeHideIcon from '../../../components/icons/EyeHideIcon';
+import EyeShowIcon from '../../../components/icons/EyeShowIcon';
 
 const Page = () => {
     // fetch("https")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
         {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
@@ -16,28 +18,28 @@ const Page = () => {
     return (
     <div className="flex justify-center items-center px-4 py-14 bg-primary">
         <div className="flex shadow-2xl w-[90%] ">
-            <div  className="flex flex-col justify-center items-center gap-6 w-[60%]" >
+            <div  className="flex flex-col justify-center items-center gap-6 w-full md:w-[60%]" >
             <div>
             <h1 className="text-[24px] font-semibold text-secondary">
             Account Login
             </h1>
-            <p className="text-[14px] text-[#645D5D]">
-             Welcome Back!
-            </p>
           </div>
           <form className="flex flex-col w-[80%] gap-6 ">
-            {details.map(({name, value, type, placeholder, edit})=>{
+            {details.map(({name, value, type, placeholder, edit}, i)=>{
                 return (     
-              <div className= 'w-full relative' key={name}>
+              <div className= 'w-full' key={name}>
                    <label className="text-[14px]">{name}</label>
                    <input 
                    type={type}
                    name={name}
-                   className={"w-full p-3 rounded-lg border-[1px] border-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 " }
+                   className={"relative w-full p-3 rounded-lg border-[1px] border-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 " }
                    placeholder={placeholder}
                    value={value}
                    onChange={(e)=>edit(e.target.value)}
                    ></input>
+                   {
+                    showPassword ? <EyeHideIcon onClick={()=> setShowPassword(false)} className={i > 0 ? 'absolute right-5 top-[50%]' : "hidden"}/> : <EyeShowIcon onClick={()=> setShowPassword(true)} className={i > 2 ? 'absolute right-5 top-[50%]' : "hidden"}/>
+                   }
                 </div>
                 )
             })}
