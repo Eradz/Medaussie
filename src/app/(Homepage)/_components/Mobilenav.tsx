@@ -6,9 +6,9 @@ import Link from "next/link";
 const menuItems =  [
   {name: "Home", link:"/"},
   {name: "About", link:"/about"},
-  {name: "Exams", link:"/"},
-  {name: "Licensing", link:"/about"},
-  {name: "Resources", link:"/about"},
+  {name: "Exams", link:"/exam"},
+  {name: "Licensing", link:"/license"},
+  {name: "Resources", link:"/resources"},
 
 ]
 function Mobilenav() {

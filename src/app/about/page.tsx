@@ -5,8 +5,8 @@ export default function Page () {
 
   const customers = [
     {image:"/head2.jpeg", name: "David", comment: "Medaussie Australia has been a game-changer for me. I'm grateful for the support community."},
-    {image:"/head3.jpeg", name: "Sarah", comment: "As an international medical graduate from Nigeria, I faced numerous hurdles in understanding the Australian medical system."},
-    {image:"/head1.jpeg", name: "John", comment: "The comprehensive platform offered by Medaussie Australia is exactly what I needed for my journey."},
+    {image:"/head3.jpeg", name: "John", comment: "As an international medical graduate from Nigeria, I faced numerous hurdles in understanding the Australian medical system."},
+    {image:"/head1.jpeg", name: "Sarah", comment: "The comprehensive platform offered by Medaussie Australia is exactly what I needed for my journey."},
   ]
 
   return (
