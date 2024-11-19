@@ -10,9 +10,9 @@ export default function Page () {
   ]
 
   return (
-    <div className="flex flex-col bg-primary pt-14 px-12 text-secondary gap-8 ">
+    <div className="flex flex-col bg-primary pt-14 px-12 text-secondary gap-3 ">
       <div className="flex gap-[5%]">
-          <div className="flex flex-col w-[45%] py-12 px-5">
+          <div className="flex flex-col md:w-[45%] py-12 px-5">
           <h3 className="">About Us</h3>
         <div >At Medaussie Australia, we are a dedicated team committed to empowering international medical
         graduates. Founded in 2023, our mission is to provide essential resources and support for those navigating the Australian medical licensing
@@ -21,14 +21,14 @@ export default function Page () {
             and a supportive forum for sharing experiences. We are passionate about facilitating the success of healthcare professionals in
             Australia, ensuring they can pursue their careers with confidence and clarity.</div>
           </div>
-          <Image width={736} height={1104} src="/doctor.jpeg" alt='Hero' className="w-[50%]"/>
+          <Image width={736} height={1104} src="/doctor.jpeg" alt='Hero' className="w-[50%] hidden md:block"/>
       </div>
-      <div className="flex flex-col items-center gap-7 py-5 ">
+      <div className="flex flex-col items-center gap-7 py-2 ">
         <h3>{"Customers' Opinions Matter."}</h3>
-        <div className="flex justify-between text-center">
+        <div className="flex flex-col md:flex-row md:justify-between text-center items-center gap-5">
         {customers.map(({name, image, comment}, i)=>{
           return(
-            <div className={i === 1 ? "flex flex-col bg-[#F5F5F5] p-5 h-[350px] w-[30%] gap-5 relative" : "flex flex-col bg-[#F5F5F5] h-[300px] p-5 w-[30%] gap-4 relative"} key={name}>
+            <div className={i === 1 ? "flex flex-col bg-[#F5F5F5] p-5 h-[350px] w-[80%] md:w-[30%] gap-5 relative" : "flex flex-col bg-[#F5F5F5] h-[300px] p-5 w-[80%] md:w-[30%] gap-4 relative"} key={name}>
               <Image width={120} height={120} src={image} alt="User" className="rounded-full mx-auto"/>
               <div className="font-bold">{name}</div>
               <div>{comment}</div>

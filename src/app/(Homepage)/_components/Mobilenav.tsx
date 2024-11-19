@@ -60,7 +60,7 @@ function Mobilenav() {
           </div>
           <div className="flex flex-col items-center gap-8 mt-4 mx-auto">
                 {menuItems.map(({name, link}) => (
-                  <Link key={name} href={link}>
+                  <Link key={name} href={link} onClick={()=> setMenuOpen(false)}>
                     <p>
                       {name}
                     </p>
