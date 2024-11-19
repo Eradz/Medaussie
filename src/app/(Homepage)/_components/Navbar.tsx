@@ -7,7 +7,7 @@ const navLinks = [
     {name: "About", link:"/about"},
     {name: "Exams", link:"/exam"},
     {name: "Licensing", link:"/license"},
-    {name: "Resources", link:"/resource"},
+    {name: "Resources", link:"/resources"},
 ]
 function Navbar() {
   return (

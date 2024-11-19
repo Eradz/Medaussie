@@ -6,10 +6,13 @@ import Link from "next/link";
 const menuItems =  [
   {name: "Home", link:"/"},
   {name: "About", link:"/about"},
-  {name: "Exams", link:"/"},
-  {name: "Licensing", link:"/about"},
-  {name: "Resources", link:"/about"},
-
+  {name: "Exams", link:"/exam"},
+  {name: "Licensing", link:"/license"},
+  {name: "Resources", link:"/resources"},
+]
+const register =  [
+  {name: "Signup", link:"/signup"},
+  {name: "Login", link:"/login"},
 ]
 function Mobilenav() {
 
@@ -58,12 +61,19 @@ function Mobilenav() {
               ></path>
             </svg>
           </div>
-          <div className="flex flex-col items-center gap-8 mt-4 mx-auto">
+          <div className="flex flex-col items-center gap-8 mt-4 mx-auto ">
                 {menuItems.map(({name, link}) => (
                   <Link key={name} href={link} onClick={()=> setMenuOpen(false)}>
                     <p>
                       {name}
                     </p>
+                  </Link>
+                ))}
+                {register.map(({name, link}) => (
+                  <Link className="flex justify-center w-full"  key={name} href={link} onClick={()=> setMenuOpen(false)}>
+                    <button className='w-[70%] py-3 font-bold border text-secondary border-secondary bg-primary rounded-sm hover:bg-secondary hover:text-primary hover:border-primary'>
+                      {name}
+                    </button>
                   </Link>
                 ))}
           </div>
