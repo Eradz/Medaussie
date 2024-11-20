@@ -51,7 +51,7 @@ const Page = () => {
                 )
             })}
           </form>
-          <div className="py-6 flex flex-col justify-center items-center gap-4 w-full">
+          <div className="pb-6 flex flex-col justify-center items-center gap-4 w-full">
           <button
               type="submit"
               className="bg-secondary text-white bg-success400 w-[60%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium hover:rounded-xl"

@@ -47,7 +47,7 @@ const Page = () => {
           <div className='w-full text-right px-14'>
           <Link href="">Forgot Password?</Link>
           </div>
-          <div className="py-6 flex flex-col justify-center items-center gap-4 w-full">
+          <div className="pb-8 flex flex-col justify-center items-center gap-4 w-full">
           <button
               type="submit"
               className="bg-secondary text-white bg-success400 w-[60%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium hover:rounded-xl"
