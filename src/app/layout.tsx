@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Montserrat} from "next/font/google"
 import "./globals.css";
+import ToastProvider from "../toast/toastContainer";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body
         className={montserrat.className}
       >
+        <ToastProvider>
         {children}
+        </ToastProvider>
       </body>
     </html>
   );

@@ -5,16 +5,35 @@ import Link from "next/link"
 import GoogleIcon from '../../../components/icons/GoogleIcon';
 import EyeHideIcon from '../../../components/icons/EyeHideIcon';
 import EyeShowIcon from '../../../components/icons/EyeShowIcon';
+import showToast  from '../../toast/toast';
+import { callApi } from '@zayne-labs/callapi';
 
 const Page = () => {
-    // fetch("https")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
         {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
     ]
+    const data = {email, password}
+    const handleSubmit = async () => {
+      setLoading(true)
+      await callApi<{message: string}>('http://localhost:5000/api/v1/users/login', {
+        method: 'POST',
+        body: data,
+        onResponse:({ data }) => {
+          setLoading(false)
+          showToast({type:'success', content: data.message})
+        },
+        onError:({ error }) => {
+          setLoading(false)
+          showToast({type:'error', content: error.message})
+        }
+      });
+    }
+
     return (
     <div className="flex justify-center items-center px-4 py-14 bg-primary">
         <div className="flex shadow-2xl w-[90%] ">
@@ -49,10 +68,11 @@ const Page = () => {
           </div>
           <div className="pb-8 flex flex-col justify-center items-center gap-4 w-full">
           <button
+              onClick={handleSubmit}
               type="submit"
               className="bg-secondary text-white bg-success400 w-[60%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium hover:rounded-xl"
             >
-             <p>Submit</p>
+             <p>{loading ? "Loading..." : "Submit"}</p>
             </button>
             <Link
               href=""
