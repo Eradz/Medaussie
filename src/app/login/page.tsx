@@ -7,12 +7,14 @@ import EyeHideIcon from '../../../components/icons/EyeHideIcon';
 import EyeShowIcon from '../../../components/icons/EyeShowIcon';
 import showToast  from '../../toast/toast';
 import { callApi } from '@zayne-labs/callapi';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
         {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
@@ -20,12 +22,13 @@ const Page = () => {
     const data = {email, password}
     const handleSubmit = async () => {
       setLoading(true)
-      await callApi<{message: string}>('http://localhost:5000/api/v1/users/login', {
+      await callApi<{message: string}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/users/login' : "https://medaussie-backend.onrender.com/api/v1/users/login", {
         method: 'POST',
         body: data,
         onResponse:({ data }) => {
           setLoading(false)
           showToast({type:'success', content: data.message})
+          router.push("/admin")
         },
         onError:({ error }) => {
           setLoading(false)

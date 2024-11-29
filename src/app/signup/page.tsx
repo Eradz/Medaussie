@@ -30,7 +30,7 @@ const Page = () => {
     const data = {email, password, firstname, lastname}
     const handleSubmit = async () => {
       setLoading(true)
-      await callApi<{message: string}>('http://localhost:5000/api/v1/users/signup', {
+      await callApi<{message: string}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/users/signup' : "https://medaussie-backend.onrender.com/api/v1/users/signup", {
         method: 'POST',
         body: data,
         onResponse:({ data }) => {
