@@ -8,8 +8,8 @@ const navLinks = [
     {name: "User", link:"/users", icon: <UserIcon/>},
     {name: "Exams", link:"/exams", icon: <BookIcon/>},
     {name: "License", link:"/licenses",  icon: <LicenseIcon/>},
-    {name: "Licensing", link:"/license"},
-    {name: "Resources", link:"/resources"},
+    {name: "Licensing", link:"/license", icon: <LicenseIcon/>},
+    {name: "Resources", link:"/resources", icon: <LicenseIcon/>},
 ]
 const SideBar = () => {
   return (

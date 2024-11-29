@@ -10,7 +10,7 @@ const layout = () => {
         <div className='w-[30%] '>
         <SideBar/>
         </div>
-        <div className='w-[70%] '>
+        <div className='w-full '>
         <Page/>
         </div>
         </div>
