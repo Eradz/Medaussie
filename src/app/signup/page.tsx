@@ -5,6 +5,10 @@ import Link from "next/link"
 import GoogleIcon from '../../../components/icons/GoogleIcon';
 import EyeHideIcon from '../../../components/icons/EyeHideIcon';
 import EyeShowIcon from '../../../components/icons/EyeShowIcon';
+import { callApi } from '@zayne-labs/callapi';
+// import showToast from '@/toast/toast';
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
     // fetch("https")
@@ -14,6 +18,8 @@ const Page = () => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
@@ -22,6 +28,25 @@ const Page = () => {
         {type: showPassword ? "text" : "password" , name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
         {type: showPassword ? "text" : "password" , name: "Confirm Password", placeholder: "Enter your Password", value: confirmPassword, edit: (value: string)=>{setConfirmPassword(value)}},
     ]
+    const data = {email, password, firstname, lastname}
+    const handleSubmit = async () => {
+      setLoading(true)
+      await callApi<{message: string}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/users/signup' : "https://medaussie-backend.onrender.com/api/v1/users/signup", {
+        method: 'POST',
+        body: data,
+        onResponse:({ data }) => {
+          setLoading(false)
+          // showToast({type:'success', content: data.message})
+          toast.success(data.message)
+          router.push("/login")
+        },
+        onError:({ error }) => {
+          setLoading(false)
+          // showToast({type:'error', content: error.message})
+          toast.error(error.message)
+        }
+      });
+    }
     return (
     <div className="flex justify-center items-center px-4 py-14 bg-primary">
         <div className="flex shadow-2xl w-[90%] ">
@@ -31,7 +56,7 @@ const Page = () => {
             Register Account
             </h1>
           </div>
-          <form className="flex flex-col w-[80%] gap-6 ">
+          <form className="flex flex-col w-[80%] gap-6 " >
             {details.map(({name, value, type, placeholder, edit}, i)=>{
                 return (     
               <div className= 'w-full relative' key={name}>
@@ -53,10 +78,11 @@ const Page = () => {
           </form>
           <div className="pb-6 flex flex-col justify-center items-center gap-4 w-full">
           <button
+          onClick={handleSubmit}
               type="submit"
-              className="bg-secondary text-white bg-success400 w-[60%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium hover:rounded-xl"
+              className="mx-auto bg-secondary text-white bg-success400 w-[60%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium hover:rounded-xl"
             >
-             <p>Submit</p>
+             <p>{loading? "Loading....": "Submit"}</p>
             </button>
             <Link
               href=""
