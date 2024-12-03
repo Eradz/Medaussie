@@ -26,6 +26,9 @@ h3{
   font-size: 32px;
   font-weight: bold;
 }
+tr{
+  border: 0.5px solid #dddddd;
+}
 
 @media screen and (max-width: 768px) {
   h3{
