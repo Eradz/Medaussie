@@ -6,7 +6,8 @@ import GoogleIcon from '../../../components/icons/GoogleIcon';
 import EyeHideIcon from '../../../components/icons/EyeHideIcon';
 import EyeShowIcon from '../../../components/icons/EyeShowIcon';
 import { callApi } from '@zayne-labs/callapi';
-import showToast from '@/toast/toast';
+// import showToast from '@/toast/toast';
+import { toast } from 'sonner'
 import { useRouter } from 'next/navigation';
 
 const Page = () => {
@@ -35,12 +36,14 @@ const Page = () => {
         body: data,
         onResponse:({ data }) => {
           setLoading(false)
-          showToast({type:'success', content: data.message})
+          // showToast({type:'success', content: data.message})
+          toast.success(data.message)
           router.push("/login")
         },
         onError:({ error }) => {
           setLoading(false)
-          showToast({type:'error', content: error.message})
+          // showToast({type:'error', content: error.message})
+          toast.error(error.message)
         }
       });
     }
