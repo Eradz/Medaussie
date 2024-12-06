@@ -1,12 +1,17 @@
 "use client"
-import React from 'react'
+import React, {useCallback} from 'react'
 import { type Editor } from '@tiptap/react'
+import { callApi } from '@zayne-labs/callapi'
 import {Bold, Strikethrough, Italic, List, ListOrdered, Heading2, Underline, Quote, Undo, Redo, Image} from "lucide-react"
 const Toolbar = ({editor, content}: {editor: Editor | null, content: string }) => {
 
     if(!editor){
         return null
     }
+
+    // const uploadImage = useCallback(async() => {
+    //     const url = await callApi()
+    // }, [editor])
     const toolBarElements = [
         {icon: <Bold/>, click: ()=>editor.chain().focus().toggleBold().run(), name: "bold"},
         {icon: <Strikethrough/>, click: ()=>editor.chain().focus().toggleStrike().run(), name: "strike"},
