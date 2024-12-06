@@ -1,9 +1,8 @@
 import React from 'react'
-import Page from './page'
 import Footer from '../(Homepage)/_components/Footer'
 import SideBar from './_components/SideBar'
 
-const layout = () => {
+const layout = ({children}: {children: React.ReactNode}) => {
   return (
     <div className='relative'>
         <div className='flex h-screen'>
@@ -11,7 +10,7 @@ const layout = () => {
         <SideBar/>
         </div>
         <div className='w-full '>
-        <Page/>
+       {children}
         </div>
         </div>
         <Footer/>
