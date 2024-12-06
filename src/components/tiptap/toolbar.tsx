@@ -1,12 +1,12 @@
 "use client"
-import React, {useCallback} from 'react'
+// import React, {useCallback} from 'react'
 import { type Editor } from '@tiptap/react'
-import { callApi } from '@zayne-labs/callapi'
-import {Bold, Strikethrough, Italic, List, ListOrdered, Heading2, Underline, Quote, Undo, Redo, Image} from "lucide-react"
+// import { callApi } from '@zayne-labs/callapi'
+import {Bold, Strikethrough, Italic, List, ListOrdered, Heading2, Underline, Undo, Redo} from "lucide-react"
 const Toolbar = ({editor, content}: {editor: Editor | null, content: string }) => {
 
     if(!editor){
-        return null
+        return false
     }
 
     // const uploadImage = useCallback(async() => {
@@ -18,12 +18,11 @@ const Toolbar = ({editor, content}: {editor: Editor | null, content: string }) =
         {icon: <Italic/>, click: ()=>editor.chain().focus().toggleItalic().run(), name: "italic"},
         {icon: <List/>, click: ()=>editor.chain().focus().toggleBulletList().run(), name: "bulletList"},
         {icon: <ListOrdered/>, click: ()=>editor.chain().focus().toggleOrderedList().run(), name: "orderedList"},
-        {icon: <Heading2/>, click: ()=>editor.chain().focus().toggleHeading({level: 2}).run(), name: "heading2"},
+        {icon: <Heading2/>, click: ()=> editor.chain().focus().toggleHeading({ level: 1 }).run(), name: 'heading'},
         {icon: <Underline/>, click: ()=>editor.chain().focus().toggleUnderline().run(), name: "underline"},
-        {icon: <Quote/>, click: ()=>editor.chain().focus().toggleBlockquote().run(), name: "blockquote"},
         {icon: <Undo/>, click: ()=>editor.chain().focus().undo().run(), name: "undo"},
         {icon: <Redo/>, click: ()=>editor.chain().focus().redo().run(), name: "redo"},
-        {icon: <Image/>, click: ()=>editor.chain().focus().toggleBulletList().run(), name: "image"},
+        // {icon: <Image/>, click: ()=>editor.chain().focus().toggleBulletList().run(), name: "image"},
     ]
   return (
     <div className='w-full h-16 border border-solid border-secondary justify-between flex'>

@@ -7,22 +7,16 @@ import Toolbar from './toolbar'
 
 const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content: string}) => {
   const editor = useEditor({
-    extensions: [Underline, StarterKit.configure(
-      {
-        heading:{
-            levels: [1, 2, 3],
-          },
-      }
-    )
-    ],
+    extensions: [Underline, StarterKit],
     editorProps:{
       attributes:{
-        class: "border-b border-l border-r px-4 py-3 outline-none border-secondary",
+        class: "prose max-w-none [&_ol]:list-decimal [&_ul]:list-disc border-b border-l border-r px-4 pt-3 pb-[100px] outline-none border-secondary",
       }
     },
     onUpdate: ({editor})=>{
       onchange(editor.getHTML())
-    }
+    },
+    immediatelyRender: false
   })
 
   return (
