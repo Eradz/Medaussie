@@ -2,11 +2,6 @@
 
 import React, {useState} from "react";
 import Tiptap from "@/components/tiptap/tiptap";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { useRouter } from "next/navigation";
-// import { FileInput, Label } from "flowbite-react";
-// import Upload from "@/components/icons/Upload";
 
 function Page() {
   const [title, setTitle] = useState("");

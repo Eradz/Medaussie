@@ -1,6 +1,6 @@
 import React from 'react'
-import Footer from '../(Homepage)/_components/Footer'
 import SideBar from './_components/SideBar'
+import TopBar from './_components/TopBar'
 
 const layout = ({children}: {children: React.ReactNode}) => {
   return (
@@ -10,10 +10,10 @@ const layout = ({children}: {children: React.ReactNode}) => {
         <SideBar/>
         </div>
         <div className='w-full '>
+          <TopBar/>
        {children}
         </div>
         </div>
-        <Footer/>
     </div>
   )
 }
