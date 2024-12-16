@@ -3,10 +3,10 @@ import React from 'react'
 import User from '../users/page'
 import { User2Icon, BookOpenIcon, GraduationCapIcon, MessageCircleMoreIcon } from 'lucide-react'
 const sectors:{name: string, amount: string, icon: React.ReactNode, link: string}[] = [
-    {name: 'Users', amount: '20', icon: <User2Icon size={50}/>, link: '/User'},
-    {name: 'Exam Posts', amount: '30', icon: <BookOpenIcon size={50}/>, link: '/Admin'},
-    {name: 'License Posts', amount: '40', icon: <GraduationCapIcon size={50}/>, link: '/license'},
-    {name: 'Community Posts', amount: '80', icon: <MessageCircleMoreIcon size={50}/>, link: '/community'},
+    {name: 'Users', amount: '20', icon: <User2Icon size={50}/>, link: '/admin/users'},
+    {name: 'Exam Posts', amount: '30', icon: <BookOpenIcon size={50}/>, link: '/admin/exams'},
+    {name: 'License Posts', amount: '40', icon: <GraduationCapIcon size={50}/>, link: '/admin/licenses'},
+    {name: 'Community Posts', amount: '80', icon: <MessageCircleMoreIcon size={50}/>, link: '/admin/community'},
 ]
 const Dashboard = () => {
   return (
