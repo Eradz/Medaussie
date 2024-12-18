@@ -1,14 +1,12 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+const nextConfig = {
   async rewrites() {
-    return [
+    return{  fallback: [
       {
         source: '/:path*',
         destination: 'http://localhost:5000/:path*' // Proxy to Backend
       }
     ]
-  }
+  }}
 };;
 
 export default nextConfig;

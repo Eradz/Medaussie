@@ -1,19 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
-import { HomeIcon, User2Icon, BookIcon, GraduationCapIcon, MessageCircleMoreIcon } from 'lucide-react'
+import { HomeIcon, User2Icon, BookIcon, GraduationCapIcon } from 'lucide-react'
 
 const navLinks = [
     {name: "Dashboard", link:"/", icon: <HomeIcon/>},
-    {name: "User", link:"/users", icon: <User2Icon/>},
+    {name: "Users", link:"/users", icon: <User2Icon/>},
     {name: "Exams", link:"/exams", icon: <BookIcon/>},
-    {name: "License", link:"/licenses",  icon: <GraduationCapIcon/>},
-    {name: "Community", link:"/community", icon: <MessageCircleMoreIcon/>},
+    {name: "Licenses", link:"/licenses",  icon: <GraduationCapIcon/>},
 ]
 const SideBar = () => {
   return (
     <div className='flex flex-col bg-secondary text-primary h-full p-5'>
          <Link href="/admin">
-          <h3 className="font-bold text-left flex gap-2">Admin <p>Medaussie</p></h3>
+          <h3 className="font-bold text-center flex gap-2">Admin Medaussie</h3>
         </Link>
         {navLinks.map(({name, link, icon})=>{
             return(
