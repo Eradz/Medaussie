@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../(Homepage)/_components/Footer'
 import SideBar from './_components/SideBar'
 
 const layout = ({children}: {children: React.ReactNode}) => {
@@ -13,7 +12,6 @@ const layout = ({children}: {children: React.ReactNode}) => {
        {children}
         </div>
         </div>
-        <Footer/>
     </div>
   )
 }
