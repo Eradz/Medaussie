@@ -3,14 +3,14 @@
 import React, {useState} from "react";
 import Tiptap from "@/components/tiptap/tiptap";
 
-function EditExam({paramSlug} :{paramSlug:string}) {
+function EditExam({paramId} :{paramId:string}) {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [slug, setSlug] = useState("");
   const [body, setBody] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
 
-  console.log(paramSlug)
+  console.log(paramId)
    const details = [
     {type: "text", name: "Title", placeholder: "Enter a title", value: title, edit: (value: string)=>{setTitle(value)}},
     {type: 'text', name: "Slug", placeholder: "Enter a unique and short slug to render you post", value: slug, edit: (value: string)=>{setSlug(value)}},
