@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {Montserrat} from "next/font/google"
 import "./globals.css";
 import { Toaster } from 'sonner'
+import {EventCreatorContextProvider} from "@/components/context/UserContext"
 
 const montserrat = Montserrat({
   weight: "400",
@@ -24,7 +25,9 @@ export default function RootLayout({
         className={montserrat.className}
       >
         <Toaster position="top-right" richColors/>
-        {children}
+        <EventCreatorContextProvider>
+          {children}
+        </EventCreatorContextProvider>
       </body>
     </html>
   );

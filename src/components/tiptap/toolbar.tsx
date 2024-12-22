@@ -16,7 +16,7 @@ const Toolbar = ({editor, content}: {editor: Editor | null, content: string }) =
         await callApi<{message: string, data: string}>(process.env.NEXT_PUBLIC_NEXT_ENV === "development" ? 'http://localhost:5000/api/v1/upload/single' : "https://medaussie-backend.onrender.com/api/v1/upload/single", {
           method: 'POST',
           body: formData,
-          onResponse: ({ data }) => {
+          onSuccess: ({ data }) => {
             editor?.chain().focus().setImage({ src: data.data }).run();
           },
           onError: ({ error }) => {
