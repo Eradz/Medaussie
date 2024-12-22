@@ -28,13 +28,13 @@ const List = ({data, top}: {data: dataType | userType, top: topType }) => {
     return ( 
       <tr key={i} className={i % 2 === 0 ? 'flex items-center' : 'flex items-center bg-[#dddddd] '}>
         <td className='w-[5%] p-4 text-ellipsis '>{i + 1}</td>
-        <td className='w-[15%] p-4 text-ellipsis overflow-hidden '>{Object.values(user)[0]}</td>
-        <td className='w-[15%] p-4 text-ellipsis overflow-hidden'>{Object.values(user)[1]}</td>
-        <td className={top[3].name === "Email" ? 'w-[35%] p-4 text-ellipsis overflow-hidden' : "w-[10%] p-4 text-ellipsis overflow-hidden"}>{Object.values(user)[2]}</td>
-        <td className={top[3].name === "Email" ? 'hidden' : "w-[30%] p-4 text-ellipsis overflow-hidden"}>{Object.values(user)[3]}</td>
-        <td className='w-[10%] p-4 text-ellipsis'>{top[3].name === "Email" ?Object.values(user)[3]: Object.values(user)[4]}</td>
+        <td className='w-[15%] p-4 text-ellipsis overflow-hidden '>{Object.values(user)[1]}</td>
+        <td className='w-[15%] p-4 text-ellipsis overflow-hidden'>{Object.values(user)[2]}</td>
+        <td className={top[3].name === "Email" ? 'w-[35%] p-4 text-ellipsis overflow-hidden' : "w-[10%] p-4 text-ellipsis overflow-hidden"}>{Object.values(user)[3]}</td>
+        <td className={top[3].name === "Email" ? 'hidden' : "w-[30%] p-4 text-ellipsis overflow-hidden"}>{Object.values(user)[4]}</td>
+        <td className='w-[10%] p-4 text-ellipsis'>{top[3].name === "Email" ?Object.values(user)[4]: Object.values(user)[5]}</td>
         <td className= {top[3].name === "Email" ? "w-[15%] pl-6 pr-4 text-center flex justify-between" :'w-[12%] text-center flex justify-between'}>
-          <Link href={top[3].name === "Email" ? `${pathName}/${Object.values(user)[3]}`:`${pathName}/${Object.values(user)[2]}`}>
+          <Link href={`${pathName}/${Object.values(user)[0]}`}>
           <EditIcon className='hover:cursor-pointer text-green-400'/>
           </Link>
           <Trash2Icon className='hover:cursor-pointer text-red-400'/>
