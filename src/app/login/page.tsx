@@ -5,10 +5,10 @@ import Link from "next/link"
 import GoogleIcon from '../../../components/icons/GoogleIcon';
 import EyeHideIcon from '../../../components/icons/EyeHideIcon';
 import EyeShowIcon from '../../../components/icons/EyeShowIcon';
-// import showToast  from '../../toast/toast';
 import { toast } from 'sonner'
 import { callApi } from '@zayne-labs/callapi';
 import { useRouter } from 'next/navigation';
+import { UserContext } from '@/components/context/UserContext'
 
 const Page = () => {
     const [email, setEmail] = useState("");
@@ -16,6 +16,7 @@ const Page = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const router = useRouter()
+    const { user, setUser } = UserContext()
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
         {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
@@ -23,19 +24,25 @@ const Page = () => {
     const data = {email, password}
     const handleSubmit = async () => {
       setLoading(true)
-      await callApi<{message: string}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/users/login' : "https://medaussie-backend.onrender.com/api/v1/users/login", {
+      await callApi<{message: string, data:{
+        role: string
+        id: string
+      }}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/auth/login' : "https://medaussie-backend.onrender.com/api/v1/auth/login", {
         method: 'POST',
+        credentials: "include",
         body: data,
-        onResponse:({ data }) => {
+        onSuccess:({ data }) => {
           setLoading(false)
-          // showToast({type:'success', content: data.message})
           toast.success(data.message)
-          router.push("/admin")
+          setUser({...user, _id : data.data.id});
+          if(data.data.role === "admin"){
+            return router.push("/admin")
+          }
+           return router.push("/exam")
         },
         onError:({ error }) => {
           setLoading(false)
           toast.error(error.message)
-          // showToast({type:'error', content: error.message})
         }
       });
     }
