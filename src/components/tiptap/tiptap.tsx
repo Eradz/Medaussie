@@ -5,8 +5,10 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import Image from '@tiptap/extension-image'
 import Toolbar from './toolbar'
+import { useEffect } from 'react'
 
 const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content: string}) => {
+  console.log(`<p>${content.slice(0, 20)}</p>`)
   const editor = useEditor({
     extensions: [Underline, StarterKit, Image],
     editorProps:{
@@ -19,6 +21,12 @@ const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content
     },
     immediatelyRender: false
   })
+  useEffect(() => {
+    if(!editor){
+      return
+    }
+          editor.commands.setContent(content)
+  }, [])
 
   return (
     <div>
