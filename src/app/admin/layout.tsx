@@ -18,8 +18,8 @@ const AdminDashboardLayout = ({children}: {children: React.ReactNode}) => {
           lastname: string;
           email: string;
           role: string;
-            }}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'/api/v1/user' : "https://medaussie-backend.onrender.com/api/v1/user", {
-          credentials: "include",
+            }}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ? `http://localhost:5000/api/v1/auth/session` : `https://medaussie-backend.onrender.com/api/v1/auth/session`, {
+          credentials:"include",
           dedupeStrategy: "none",
           onSuccess:({ data }) => {
             setUser(data.data)
@@ -31,7 +31,7 @@ const AdminDashboardLayout = ({children}: {children: React.ReactNode}) => {
         });
       }
       getUser()
-    },)
+    }, [router, setUser])
 
   return (
     <div className='relative'>

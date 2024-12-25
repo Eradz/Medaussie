@@ -6,7 +6,7 @@ import Underline from '@tiptap/extension-underline'
 import Image from '@tiptap/extension-image'
 import Toolbar from './toolbar'
 
-const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content: string}) => {
+const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content: {title: string,slug: string, excerpt: string, body: string, featuredImage: File | null}}) => {
   const editor = useEditor({
     extensions: [Underline, StarterKit, Image],
     editorProps:{
