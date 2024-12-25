@@ -1,7 +1,9 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Tiptap from "@/components/tiptap/tiptap";
+import { callApi } from "@zayne-labs/callapi";
+import { toast } from "sonner";
 
 function EditExam({paramId} :{paramId:string}) {
   const [title, setTitle] = useState("");
@@ -10,7 +12,41 @@ function EditExam({paramId} :{paramId:string}) {
   const [body, setBody] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
 
-  console.log(paramId)
+  useEffect(() => {
+    if(paramId.includes("new")){
+     setTitle('')
+      setExcerpt('')
+      setSlug('')
+      setBody('')
+      setFeaturedImage('')
+      return;
+    }
+    const getUsers = async() =>{
+      await callApi<{message: string, data:{
+        title: string,
+        excerpt: string,
+        slug: string,
+        author: {
+          id: string,
+          firstname: string,
+        },
+        body: string}}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?`/api/v1/post/${paramId}` : `https://medaussie-backend.onrender.com/api/v1/post/${paramId}`, {
+        credentials: "include",
+        dedupeStrategy: "none",
+        onSuccess:({ data }) => {
+          setTitle(()=>data.data.title);
+          setExcerpt(data.data.excerpt);
+          setSlug(data.data.slug);
+          setBody(data.data.body);
+          // setFeaturedImage(()=>data.data.);
+        },
+        onError:({ error }) => {
+          toast.error(error.message)
+        }
+      });
+    }
+    getUsers()
+  }, [paramId])
    const details = [
     {type: "text", name: "Title", placeholder: "Enter a title", value: title, edit: (value: string)=>{setTitle(value)}},
     {type: 'text', name: "Slug", placeholder: "Enter a unique and short slug to render you post", value: slug, edit: (value: string)=>{setSlug(value)}},
@@ -18,13 +54,10 @@ function EditExam({paramId} :{paramId:string}) {
     {type: 'file', name: "Featured Image", placeholder: "Upload a Valid PNG/JPEG ", value: featuredImage, edit: (value: string)=>{setFeaturedImage(value)}},
     {type: 'text', name: "Body", placeholder: "Write your content here", value: body, edit: (value: string)=>{setBody(value)}},
 ]
-// const data = {
-//   title, excerpt, slug,featuredImage
-// }
   return (  
         <div className="lg:flex-1 px-4 bg-primary justify-center items-center">
           <form className="flex flex-wrap justify-between w-[100%]">
-            {details.map(({name, type, placeholder})=>{
+            {details.map(({name, type, value, placeholder, edit})=>{
                 return (     
               <div className= { name === "Body" ? 'w-[100%] mt-2' : "w-[45%] mt-2"} key={name}>
                 <label className="text-[14px]">{name}</label>
@@ -33,8 +66,10 @@ function EditExam({paramId} :{paramId:string}) {
                    <input 
                    type={type}
                    name={name}
+                   value={value}
                    className={"w-full p-3 border border-solid border-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 "}
                    placeholder={placeholder}
+                   onChange={(e)=>edit(e.target.value)}
                    accept="image/png, imae/jpeg"
                    ></input>
                   }

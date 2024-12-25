@@ -31,7 +31,7 @@ const AdminDashboardLayout = ({children}: {children: React.ReactNode}) => {
         });
       }
       getUser()
-    }, [])
+    },)
 
   return (
     <div className='relative'>

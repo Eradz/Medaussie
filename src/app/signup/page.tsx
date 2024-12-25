@@ -85,7 +85,7 @@ const Page = () => {
              <p>{loading? "Loading....": "Submit"}</p>
             </button>
             <Link
-              href=""
+              href="https://medaussie-backend.onrender.com/api/v1/auth/google"
               className="w-[80%] rounded-[20px] border-solid border-[2px] border-[#DADCE0] bg-light flex px-6 py-2 justify-center items-center gap-3"
             >
               <GoogleIcon/>

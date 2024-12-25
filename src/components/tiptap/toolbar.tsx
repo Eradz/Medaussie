@@ -21,7 +21,6 @@ const Toolbar = ({editor, content}: {editor: Editor | null, content: string }) =
           },
           onError: ({ error }) => {
             toast.error(error.message)
-            console.log(error.message)
           },
         })
       };

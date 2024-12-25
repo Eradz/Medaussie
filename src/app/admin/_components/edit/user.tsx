@@ -1,7 +1,7 @@
 "use client";
 
-import { callApi } from "@zayne-labs/callapi";
 import React, {useEffect, useState} from "react";
+import { callApi } from "@zayne-labs/callapi";
 import { toast } from "sonner";
 
 function EditUser({paramId} :{paramId:string}) {
@@ -11,31 +11,31 @@ function EditUser({paramId} :{paramId:string}) {
   const [lastname, setLastname] = useState("")
   const [role, setRole] = useState("")
   useEffect(() => {
-      const getUsers = async() =>{
-        
-        await callApi<{message: string, data:{
-          firstname: string,
-          lastname: string,
-          email: string,
-          role: string,
-          _id: string,
-        }}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?`/api/v1/user/${paramId}` : `https://medaussie-backend.onrender.com/api/v1/user/${paramId}`, {
-          credentials: "include",
-          dedupeStrategy: "none",
-          onSuccess:({ data }) => {
-            // setUser(data.data);
-            setEmail(()=>data.data.email);
-            setFirstname(()=>data.data.firstname);
-            setLastname(()=>data.data.lastname);
-            setRole(()=>data.data.role);
-          },
-          onError:({ error }) => {
-            toast.error(error.message)
-          }
-        });
-      }
-      getUsers()
-    }, [])
+    const getUsers = async() =>{
+      await callApi<{message: string, data:{
+        firstname: string,
+        lastname: string,
+        email: string,
+        role: string,
+        _id: string,
+      }}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?`/api/v1/user/${paramId}` : `https://medaussie-backend.onrender.com/api/v1/user/${paramId}`, {
+        credentials: "include",
+        dedupeStrategy: "none",
+        onSuccess:({ data }) => {
+          // setUser(data.data);
+          setEmail(()=>data.data.email);
+          setFirstname(()=>data.data.firstname);
+          setLastname(()=>data.data.lastname);
+          setRole(()=>data.data.role);
+        },
+        onError:({ error }) => {
+          toast.error(error.message)
+        }
+      });
+    }
+    getUsers()
+    
+    }, [paramId])
 
    const details = [
     {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
