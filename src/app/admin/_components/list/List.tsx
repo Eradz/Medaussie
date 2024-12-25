@@ -18,7 +18,6 @@ const List = ({data, top}: {data: postType[] | userType[], top: listTopType[] })
   const clickDelete = (i : string) =>{
   setIsDeletePopupOpen(true)
   setDeleteData(i)
-  console.log(i)
 }
   return (
  <div className='bg-primary h-full overflow-scroll overflow-x-hidden flex flex-col text-[14px]'>
@@ -58,7 +57,7 @@ const List = ({data, top}: {data: postType[] | userType[], top: listTopType[] })
       <div className={top[3].name === "Email" ? 'w-[35%] p-4 text-ellipsis overflow-hidden' : "w-[10%] p-4 text-ellipsis overflow-hidden"}>{user.email}</div>
       <div className='w-[10%] p-4 text-ellipsis overflow-hidden'>{user.role}</div>
       <div className= {top[3].name === "Email" ? "w-[15%] pl-6 pr-4 text-center flex justify-between" :'w-[12%] text-center flex justify-between'}>
-        <Link href={`${pathName}/${user._id}`}>
+        <Link href={pathName.includes("users")?`${pathName}/${user._id}`: `/admin/users/${user._id}`}>
         <EditIcon className='hover:cursor-pointer text-green-400'/>
         </Link>
           <Trash2Icon onClick={()=>clickDelete(`user/${user._id}`)}  className='hover:cursor-pointer text-red-400'/>

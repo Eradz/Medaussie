@@ -4,6 +4,7 @@ import List from '../_components/list/List'
 import { callApi } from '@zayne-labs/callapi'
 import { toast } from 'sonner'
 import { postType } from '@/common/types/types'
+import Loading from '@/app/loading'
 
 const top = [
   {class: "5%", name: "S/N"},
@@ -16,7 +17,9 @@ const top = [
 ]
 const Page = () => {
   const [posts, setPosts] = useState<postType[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   useEffect(()=>{
+    setLoading(true)
     const getPost = async() =>{
       await callApi<{message: string, data:postType[]}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/post?type=license' : "https://medaussie-backend.onrender.com/api/v1/post?type=license", {
         credentials: "include",
@@ -24,15 +27,19 @@ const Page = () => {
         onSuccess:({ data }) => {
           toast.success(data.message)
           setPosts(data.data);
+          setLoading(false)
         },
         onError:({ error }) => {
           toast.error(error.message)
+          setLoading(false)
         }
       });
     }
     getPost()
   }, [setPosts])
-  console.log(posts)
+  if(loading){
+    return <Loading/>
+  }
   return <List data= {posts} top= {top}/>
 }
 

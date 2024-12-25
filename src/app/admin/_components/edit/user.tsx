@@ -3,6 +3,8 @@
 import React, {useEffect, useState} from "react";
 import { callApi } from "@zayne-labs/callapi";
 import { toast } from "sonner";
+import { userType } from "@/common/types/types";
+import Loading from "@/app/loading";
 
 function EditUser({paramId} :{paramId:string}) {
   // const [user, setUser] = useState<{ firstname: string, lastname: string, email: string, role: string, _id:string}>({firstname: "", lastname: "", email: "", role: "", _id: ""})
@@ -10,15 +12,12 @@ function EditUser({paramId} :{paramId:string}) {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [role, setRole] = useState("")
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     const getUsers = async() =>{
-      await callApi<{message: string, data:{
-        firstname: string,
-        lastname: string,
-        email: string,
-        role: string,
-        _id: string,
-      }}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?`/api/v1/user/${paramId}` : `https://medaussie-backend.onrender.com/api/v1/user/${paramId}`, {
+      await callApi<{message: string, data:userType}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?`/api/v1/user/${paramId}` : `https://medaussie-backend.onrender.com/api/v1/user/${paramId}`, {
         credentials: "include",
         dedupeStrategy: "none",
         onSuccess:({ data }) => {
@@ -27,9 +26,11 @@ function EditUser({paramId} :{paramId:string}) {
           setFirstname(()=>data.data.firstname);
           setLastname(()=>data.data.lastname);
           setRole(()=>data.data.role);
+          setLoading(false);
         },
         onError:({ error }) => {
           toast.error(error.message)
+          setLoading(false);
         }
       });
     }
@@ -37,12 +38,19 @@ function EditUser({paramId} :{paramId:string}) {
     
     }, [paramId])
 
+
    const details = [
     {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
     {type: "text", name: "Firstname", placeholder: "Enter your Firstname", value: firstname, edit: (value: string)=>{setFirstname(value)}},
     {type: "text", name: "Lastname", placeholder: "Enter your Lastname", value: lastname, edit: (value: string)=>{setLastname(value)}},
     {type: "text", name: "Role", placeholder: "Admin/user", value: role, edit: (value: string)=>{setRole(value)}}
 ]
+if(loading){
+  return (
+    <Loading/>
+  )
+ } else {
+}
   return (  
         <div className="lg:flex-1 px-4 bg-primary justify-center items-center">
           <form className="flex flex-wrap justify-between w-[100%]">
