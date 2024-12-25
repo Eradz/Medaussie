@@ -3,37 +3,8 @@ import React, { useEffect, useState } from 'react'
 import List from '../_components/list/List'
 import { callApi } from '@zayne-labs/callapi'
 import { toast } from 'sonner'
+import { postType } from '@/common/types/types'
 
-// const users :{title: string, excerpt: string, slug: string, author: string, body: string}[] = [
-//     {title: 'John', excerpt: 'Doe', slug: 'John@example.com', author: 'User', body: "xyz"},
-//     {title: 'Chidiebereeeeeeee', excerpt: 'Anagu', slug: 'anaguchidiebere@example.com', author: 'Admin', body: "xyz"},
-//     {title: 'Uche', excerpt: 'Anagu', slug: 'Uche@example.com', author: 'User', body: "xyz"},
-//     {title: 'John', excerpt: 'Doe', slug: 'John@example.com', author: 'User', body: "xyz"},
-//     {title: 'Chidiebere', excerpt: 'Anagu', slug: 'anaguchidiebere@example.com', author: 'Admin', body: "xyz"},
-//     {title: 'Uche', excerpt: 'Anagu', slug: 'Uche@example.com', author: 'User', body: "xyz"},
-//     {title: 'John', excerpt: 'Doe', slug: 'John@example.com', author: 'User', body: "xyz"},
-//     {title: 'Chidiebere', excerpt: 'Anagu', slug: 'anaguchidiebere@example.com', author: 'Admin', body: "xyz"},
-//     {title: 'Uche', excerpt: 'Anagu', slug: 'Uche@example.com', author: 'User', body: "xyz"},
-//     {title: 'John', excerpt: 'Doe', slug: 'John@example.com', author: 'User', body: "xyz"},
-//     {title: 'Chidiebere', excerpt: 'Anagu', slug: 'anaguchidiebere@example.com', author: 'Admin', body: "xyz"},
-//     {title: 'Uche', excerpt: 'Anagu', slug: 'Uche@example.com', author: 'User', body: "xyz"},
-//     {title: 'John', excerpt: 'Doe', slug: 'John@example.com', author: 'User', body: "xyz"},
-//     {title: 'Chidiebere', excerpt: 'Anagu', slug: 'anaguchidiebere@example.com', author: 'Admin', body: "xyz"},
-//     {title: 'Uche', excerpt: 'Anagu', slug: 'Uche@example.com', author: 'User', body: "xyz"},
-//     {title: 'John', excerpt: 'Doe', slug: 'John@example.com', author: 'User', body: "xyz"},
-// ]
-type postType = {
-    _id: string,
-    title: string,
-    type: string,
-    excerpt: string,
-    slug: string,
-    author: {
-      _id: string,
-      firstname: string,
-    },
-    body: string
-}
 const top = [
   {class: "5%", name: "S/N"},
   {class: "15%", name: "Title"},

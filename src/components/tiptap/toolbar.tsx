@@ -67,7 +67,7 @@ const toolBarElements = [
         credentials: "include",
         onSuccess: ({ data }) => {
           toast.success(data.message)
-          router.push("/admin/exams")
+          router.push(`/admin/${type()}s`)
         },
         onError: ({ error }) => {
           toast.error(error.message)

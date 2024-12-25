@@ -41,7 +41,7 @@ const List = ({data, top}: {data: postType[] | userType[], top: listTopType[] })
         <div className='w-[15%] p-4 text-ellipsis overflow-hidden '>{user.title}</div>
         <div className='w-[15%] p-4 text-ellipsis overflow-hidden'>{user.excerpt}</div>
         <div className={top[3].name === "Email" ? 'w-[35%] p-4 text-ellipsis overflow-hidden' : "w-[10%] p-4 text-ellipsis overflow-hidden"}>{user.slug}</div>
-        <div className={top[3].name === "Email" ? 'hidden' : "w-[30%] p-4 text-ellipsis overflow-hidden"}>{`${user.body.slice(0, 30)}...`}</div>
+        <div className={top[3].name === "Email" ? 'hidden' : "w-[30%] p-4 text-ellipsis overflow-hidden"}>{`${user.body.slice(3, 30)}...`}</div>
         <div className='w-[10%] p-4 text-ellipsis overflow-hidden'>{user.author.firstname}</div>
         <div className= {top[3].name === "Email" ? "w-[15%] pl-6 pr-4 text-center flex justify-between" :'w-[12%] text-center flex justify-between'}>
           <Link href={`${pathName}/${user._id}`}>
