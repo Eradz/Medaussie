@@ -47,7 +47,6 @@ const Page = () => {
   const [posts, setPosts] = useState<postType[]>([])
   useEffect(()=>{
     const getPost = async() =>{
-      
       await callApi<{message: string, data:postType[]}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/post?type=exam' : "https://medaussie-backend.onrender.com/api/v1/post?type=exam", {
         credentials: "include",
         dedupeStrategy: "none",
@@ -61,7 +60,8 @@ const Page = () => {
       });
     }
     getPost()
-  },)
+  }, [setPosts])
+  console.log(posts)
   return <List data= {posts} top= {top}/>
 }
 

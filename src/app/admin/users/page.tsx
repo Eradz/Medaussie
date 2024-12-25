@@ -27,7 +27,6 @@ const Page = () => {
   const [users, setUsers] = useState<{ firstname: string, lastname: string, email: string, role: string, _id:string,}[]>([])
   useEffect(() => {
     const getUsers = async() =>{
-      
       await callApi<{message: string, data:{
         firstname: string,
         lastname: string,
