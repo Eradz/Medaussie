@@ -5,6 +5,7 @@ import Tiptap from "@/components/tiptap/tiptap";
 import { callApi } from "@zayne-labs/callapi";
 import { toast } from "sonner";
 import { postType } from "@/common/types/types";
+import Loading from "@/app/loading";
 
 interface FormDetail {
   type: string;
@@ -18,8 +19,9 @@ function EditExam({ paramId }: { paramId: string }) {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [slug, setSlug] = useState("");
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState("aaaa");
   const [featuredImage, setFeaturedImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     if (paramId.includes("new")) {
@@ -30,8 +32,8 @@ function EditExam({ paramId }: { paramId: string }) {
       setFeaturedImage(null);
       return;
     }
-
     const getPost = async () => {
+      setLoading(true);
       await callApi<{
         message: string;
         data: postType;
@@ -47,15 +49,20 @@ function EditExam({ paramId }: { paramId: string }) {
             setExcerpt(data.data.excerpt);
             setSlug(data.data.slug);
             setBody(data.data.body);
+            setLoading(false)
           },
           onError: ({ error }) => {
             toast.error(error.message);
+            setLoading(false)
           },
         }
       );
     };
     getPost();
   }, [paramId]);
+  if(loading){
+    return <Loading/>
+  }
 
   const details: FormDetail[] = [
     {

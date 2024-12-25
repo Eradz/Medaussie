@@ -7,7 +7,10 @@ import Image from '@tiptap/extension-image'
 import Toolbar from './toolbar'
 
 const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content: {title: string,slug: string, excerpt: string, body: string, featuredImage: File | null}}) => {
+ 
+  
   const editor = useEditor({
+    content: content.body,  // initial content
     extensions: [Underline, StarterKit, Image],
     editorProps:{
       attributes:{
@@ -17,7 +20,9 @@ const Tiptap = ({onchange, content}: {onchange: (string: string)=> void, content
     onUpdate: ({editor})=>{
       onchange(editor.getHTML())
     },
-    immediatelyRender: false
+    immediatelyRender: true,
+    shouldRerenderOnTransaction: false,
+    
   })
 
   return (

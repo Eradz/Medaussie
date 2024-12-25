@@ -3,6 +3,8 @@ import {Montserrat} from "next/font/google"
 import "./globals.css";
 import { Toaster } from 'sonner'
 import {EventCreatorContextProvider} from "@/components/context/UserContext"
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -26,7 +28,9 @@ export default function RootLayout({
       >
         <Toaster position="top-right" richColors/>
         <EventCreatorContextProvider>
-          {children}
+          <Suspense fallback={<Loading/>}>
+            {children}
+          </Suspense>
         </EventCreatorContextProvider>
       </body>
     </html>

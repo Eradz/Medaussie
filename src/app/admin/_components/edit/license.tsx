@@ -5,6 +5,7 @@ import Tiptap from "@/components/tiptap/tiptap";
 import { callApi } from "@zayne-labs/callapi";
 import { toast } from "sonner";
 import { postType } from "@/common/types/types";
+import Loading from "@/app/loading";
 
 interface FormDetail {
   type: string;
@@ -20,6 +21,7 @@ function EditExam({ paramId }: { paramId: string }) {
   const [slug, setSlug] = useState("");
   const [body, setBody] = useState("");
   const [featuredImage, setFeaturedImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     if (paramId.includes("new")) {
@@ -30,7 +32,7 @@ function EditExam({ paramId }: { paramId: string }) {
       setFeaturedImage(null);
       return;
     }
-
+    setLoading(true);
     const getPost = async () => {
       await callApi<{
         message: string;
@@ -47,15 +49,21 @@ function EditExam({ paramId }: { paramId: string }) {
             setExcerpt(data.data.excerpt);
             setSlug(data.data.slug);
             setBody(data.data.body);
+            setLoading(false)
           },
           onError: ({ error }) => {
             toast.error(error.message);
+            setLoading(false)
           },
         }
       );
     };
     getPost();
   }, [paramId]);
+
+  if(loading){
+    return <Loading/>
+  }
 
   const details: FormDetail[] = [
     {
@@ -92,7 +100,7 @@ function EditExam({ paramId }: { paramId: string }) {
       name: "Body",
       placeholder: "Write your content here",
       value: body,
-      edit: (e: React.ChangeEvent<HTMLInputElement>) => setBody(e.target.value),
+      edit: (e: React.ChangeEvent<HTMLInputElement>) => setBody(()=>e.target.value),
     },
   ];
 

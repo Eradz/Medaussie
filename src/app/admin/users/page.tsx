@@ -3,50 +3,35 @@ import React, {useEffect, useState} from 'react'
 import List from '../_components/list/List'
 import { callApi } from '@zayne-labs/callapi'
 import { toast } from 'sonner'
-// import { UserContext } from '@/components/context/UserContext'
+import Loading from '@/app/loading'
+import { userType } from '@/common/types/types'
 
-// const users :{_id:string, firstname: string, lastname: string, email: string, role: string}[] = [
-//     {_id: "2", firstname: 'John', lastname: 'Doe', email: 'John@example.com', role: 'User'},
-//     {_id: "2", firstname: 'Chidiebereeeeeeee', lastname: 'Anagu', email: 'anaguchidiebere@example.com', role: 'Admin'},
-//     {_id: "2", firstname: 'Uche', lastname: 'Anagu', email: 'Uche@example.com', role: 'User'},
-//     {_id: "2", firstname: 'John', lastname: 'Doe', email: 'John@example.com', role: 'User'},
-//     {_id: "2", firstname: 'Chidiebere', lastname: 'Anagu', email: 'anaguchidiebere@example.com', role: 'Admin'},
-//     {_id: "2", firstname: 'Uche', lastname: 'Anagu', email: 'Uche@example.com', role: 'User'},
-//     {_id: "2", firstname: 'John', lastname: 'Doe', email: 'John@example.com', role: 'User'},
-//     {_id: "2", firstname: 'Chidiebere', lastname: 'Anagu', email: 'anaguchidiebere@example.com', role: 'Admin'},
-//     {_id: "2", firstname: 'Uche', lastname: 'Anagu', email: 'Uche@example.com', role: 'User'},
-//     {_id: "2", firstname: 'John', lastname: 'Doe', email: 'John@example.com', role: 'User'},
-//     {_id: "2", firstname: 'Chidiebere', lastname: 'Anagu', email: 'anaguchidiebere@example.com', role: 'Admin'},
-//     {_id: "2", firstname: 'Uche', lastname: 'Anagu', email: 'Uche@example.com', role: 'User'},
-//     {_id: "2", firstname: 'John', lastname: 'Doe', email: 'John@example.com', role: 'User'},
-//     {_id: "2", firstname: 'Chidiebere', lastname: 'Anagu', email: 'anaguchidiebere@example.com', role: 'Admin'},
-//     {_id: "2", firstname: 'Uche', lastname: 'Anagu', email: 'Uche@example.com', role: 'User'},
-//     {_id: "2", firstname: 'John', lastname: 'Doe', email: 'John@example.com', role: 'User'},
-// ]
 const Page = () => {
   const [users, setUsers] = useState<{ firstname: string, lastname: string, email: string, role: string, _id:string,}[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   useEffect(() => {
+    setLoading(true)
     const getUsers = async() =>{
-      await callApi<{message: string, data:{
-        firstname: string,
-        lastname: string,
-        email: string,
-        role: string,
-        _id: string,
-      }[]}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/user' : "https://medaussie-backend.onrender.com/api/v1/user", {
+      await callApi<{message: string, data:userType[]}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/user' : "https://medaussie-backend.onrender.com/api/v1/user", {
         credentials: "include",
         dedupeStrategy: "none",
         onSuccess:({ data }) => {
           toast.success(data.message)
           setUsers(data.data);
+          setLoading(false)
         },
         onError:({ error }) => {
           toast.error(error.message)
+          setLoading(false)
         }
       });
     }
     getUsers()
   }, [])
+
+  if(loading) {
+    return <Loading/>
+  }
   
   const top = [
     {class: "5%", name: "S/N"},
