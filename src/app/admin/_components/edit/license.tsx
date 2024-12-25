@@ -10,7 +10,6 @@ function EditLicense({paramId} :{paramId:string}) {
   const [body, setBody] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
 
-     console.log(paramId)
    const details = [
     {type: "text", name: "Title", placeholder: "Enter a title", value: title, edit: (value: string)=>{setTitle(value)}},
     {type: 'text', name: "Slug", placeholder: "Enter a unique and short slug to render you post", value: slug, edit: (value: string)=>{setSlug(value)}},
@@ -18,9 +17,8 @@ function EditLicense({paramId} :{paramId:string}) {
     {type: 'file', name: "Featured Image", placeholder: "Upload a Valid PNG/JPEG ", value: featuredImage, edit: (value: string)=>{setFeaturedImage(value)}},
     {type: 'text', name: "Body", placeholder: "Write your content here", value: body, edit: (value: string)=>{setBody(value)}},
 ]
-// const data = {
-//   title, excerpt, slug,featuredImage
-// }
+console.log(paramId);
+
   return (  
         <div className="lg:flex-1 px-4 bg-primary justify-center items-center">
           <form className="flex flex-wrap justify-between w-[100%]">

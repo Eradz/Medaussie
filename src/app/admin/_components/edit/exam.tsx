@@ -34,7 +34,6 @@ function EditExam({paramId} :{paramId:string}) {
         credentials: "include",
         dedupeStrategy: "none",
         onSuccess:({ data }) => {
-          console.log(data)
           setTitle(()=>data.data.title);
           setExcerpt(data.data.excerpt);
           setSlug(data.data.slug);
@@ -47,7 +46,7 @@ function EditExam({paramId} :{paramId:string}) {
       });
     }
     getUsers()
-  }, [])
+  }, [paramId])
    const details = [
     {type: "text", name: "Title", placeholder: "Enter a title", value: title, edit: (value: string)=>{setTitle(value)}},
     {type: 'text', name: "Slug", placeholder: "Enter a unique and short slug to render you post", value: slug, edit: (value: string)=>{setSlug(value)}},

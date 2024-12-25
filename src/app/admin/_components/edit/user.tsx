@@ -35,7 +35,7 @@ function EditUser({paramId} :{paramId:string}) {
     }
     getUsers()
     
-    }, [])
+    }, [paramId])
 
    const details = [
     {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},

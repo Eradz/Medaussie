@@ -61,8 +61,7 @@ const Page = () => {
       });
     }
     getPost()
-  }, [])
-  console.log(posts)
+  },)
   return <List data= {posts} top= {top}/>
 }
 
