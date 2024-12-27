@@ -21,7 +21,7 @@ const Page = () => {
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
         {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
     ]
-    const data = {email, password}
+    const data = {email: email.toLowerCase(), password}
     const handleSubmit = async () => {
       setLoading(true)
       await callApi<{message: string, data:{

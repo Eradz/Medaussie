@@ -20,7 +20,7 @@ const Page = () => {
   const [loading, setLoading] = useState<boolean>(false)
   useEffect(()=>{
     setLoading(true)
-    const getPost = async() =>{
+    const getPosts = async() =>{
       await callApi<{message: string, data:postType[]}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/post?type=exam' : "https://medaussie-backend.onrender.com/api/v1/post?type=exam", {
         credentials: "include",
         dedupeStrategy: "none",
@@ -35,7 +35,7 @@ const Page = () => {
         }
       });
     }
-    getPost()
+    getPosts()
   }, [setPosts])
   if(loading) {
     return <Loading/>

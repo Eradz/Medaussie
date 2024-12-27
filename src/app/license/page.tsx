@@ -1,6 +1,6 @@
 import React from 'react'
-import ExamBlog from './_components/LicenseBlog'
 import Image from 'next/image'
+import LicenseBlog from './_components/LicenseBlog'
 
 const page = () => {
   return (
@@ -10,7 +10,7 @@ const page = () => {
           <h3 className='text-center'>Medical License Conversion</h3>
           <p>{"Ready to practice medicine in Australia? Converting your international medical license can feel complex, but we’re here to guide you every step of the way. From understanding eligibility requirements to navigating assessments and documentation, we provide clear, reliable information to make the process smoother. Explore our resources and start your journey toward a fulfilling medical career in Australia."}</p>
         </div>
-            <ExamBlog/>
+            <LicenseBlog/>
     </div>
   )
 }

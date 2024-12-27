@@ -4,6 +4,7 @@ export type postType = {
     type: string,
     excerpt: string,
     slug: string,
+    featuredImageUrl: string,
     author: {
       _id: string,
       firstname: string,
