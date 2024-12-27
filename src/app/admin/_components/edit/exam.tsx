@@ -19,7 +19,7 @@ function EditExam({ paramId }: { paramId: string }) {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [slug, setSlug] = useState("");
-  const [body, setBody] = useState("aaaa");
+  const [body, setBody] = useState("");
   const [featuredImage, setFeaturedImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   
