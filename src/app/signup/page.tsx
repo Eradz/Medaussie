@@ -28,7 +28,7 @@ const Page = () => {
         {type: showPassword ? "text" : "password" , name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
         {type: showPassword ? "text" : "password" , name: "Confirm Password", placeholder: "Enter your Password", value: confirmPassword, edit: (value: string)=>{setConfirmPassword(value)}},
     ]
-    const data = {email, password, firstname, lastname}
+    const data = {email: email.toLowerCase(), password, firstname, lastname}
     const handleSubmit = async () => {
       setLoading(true)
       await callApi<{message: string}>(process.env.NEXT_PUBLIC_NEXT_ENV  === "development" ?'http://localhost:5000/api/v1/auth/signup' : "https://medaussie-backend.onrender.com/api/v1/auth/signup", {
@@ -36,13 +36,11 @@ const Page = () => {
         body: data,
         onSuccess:({ data }) => {
           setLoading(false)
-          // showToast({type:'success', content: data.message})
           toast.success(data.message)
           router.push("/login")
         },
         onError:({ error }) => {
           setLoading(false)
-          // showToast({type:'error', content: error.message})
           toast.error(error.message)
         }
       });

@@ -11,11 +11,14 @@ const Toolbar = ({editor, content}: {editor: Editor | null, content: {title: str
   if(!editor){
     return false
   }
+  const pathArray = pathname.split('/')
+  console.log(pathArray[2].slice(0, pathArray[2].length - 1))
   const type = () =>{
-    if(pathname.includes('exam')){
-      return 'exam'
+    if(pathArray.includes("new")){
+      return  `?type=${pathArray[2].slice(0, pathArray[2].length - 1)}` 
     }
-    return 'license'
+    return `/${pathArray[3]}`
+    
   }
   const triggerFileInput = () => {
     const fileInput = document.getElementById('file-input') as HTMLInputElement;
@@ -61,13 +64,13 @@ const toolBarElements = [
       formData.append('excerpt', content.excerpt.trim())
       formData.append('body', content.body)
       formData.append('file', content.featuredImage as File)
-      await callApi<{message: string, data: string}>(process.env.NEXT_PUBLIC_NEXT_ENV === "development" ? `/api/v1/post?type=${type()}` : `https://medaussie-backend.onrender.com/api/v1/post?type=${type()}1`, {
+      await callApi<{message: string, data: string}>(process.env.NEXT_PUBLIC_NEXT_ENV === "development" ? `http://localhost:5000/api/v1/post${type()}` : `https://medaussie-backend.onrender.com/api/v1/post${type()}1`, {
         method: 'POST',
         body: formData,
         credentials: "include",
         onSuccess: ({ data }) => {
           toast.success(data.message)
-          router.push(`/admin/${type()}s`)
+          router.push(`/admin/${pathArray[2]}`)
         },
         onError: ({ error }) => {
           toast.error(error.message)
