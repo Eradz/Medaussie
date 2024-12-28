@@ -7,7 +7,7 @@ const footerDetails =[
     {name: "About", link:"/about"},
     {name: "Exams", link:"/exam"},
     {name: "Licensing", link:"/license"},
-    {name: "Resources", link:"/resource"},
+    {name: "Legal", link:"/legal"},
 ]},
   {name: "Contacts Details", links: [
     {name: "medaussie@gmail.com", link:"mailto:medaussie@gmail.com"},

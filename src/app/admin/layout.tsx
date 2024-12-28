@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { UserContext } from '@/components/context/UserContext'
 import Loading from '../loading'
 import { userType } from '@/common/types/types'
+import Navbar from '../(Homepage)/_components/Navbar'
 const AdminDashboardLayout = ({children}: {children: React.ReactNode}) => {
   const {setUser} = UserContext()
   const router = useRouter()
@@ -36,6 +37,7 @@ const AdminDashboardLayout = ({children}: {children: React.ReactNode}) => {
         <SideBar/>
         </div>
         <div className='w-full '>
+        <Navbar/>
           <TopBar/>
           <Suspense fallback={<Loading/>}>
             {children}
