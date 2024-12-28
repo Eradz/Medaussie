@@ -1,12 +1,15 @@
 "use client"
+
 import { type Editor } from '@tiptap/react'
 import { usePathname } from 'next/navigation' 
 import {Bold, Strikethrough, Italic, List, ListOrdered, Heading2, Underline, Undo, Redo, ImageIcon} from "lucide-react"
 import { callApi } from '@zayne-labs/callapi'
 import { toast } from 'sonner'
 import {useRouter} from "next/navigation"
+import { useState } from 'react'
 const Toolbar = ({editor, content}: {editor: Editor | null, content: {title: string,slug: string, excerpt: string, body: string, featuredImage: File | null} }) => {
   const router = useRouter()
+  const [loading, setLoading] = useState<boolean>(false)
   const pathname = usePathname()
   if(!editor){
     return false
@@ -57,7 +60,7 @@ const toolBarElements = [
       })
     };
     const onSubmit = async() => {
-
+      setLoading(true);
       const formData = new FormData()
       formData.append('title', content.title.trim())
       formData.append('slug', content.slug.trim().toLowerCase().replace(/\s+/g, '-'))
@@ -70,10 +73,12 @@ const toolBarElements = [
         credentials: "include",
         onSuccess: ({ data }) => {
           toast.success(data.message)
+          setLoading(false)
           router.push(`/admin/${pathArray[2]}`)
         },
         onError: ({ error }) => {
           toast.error(error.message)
+          setLoading(false)
         },
       })
     }
@@ -110,7 +115,7 @@ const toolBarElements = [
         <input id='file-input' type="file" onChange={handleImageUpload} className='hidden'/>
        </div>
 
-        {checkIfEmpty(content) && <button onClick={onSubmit} className='py-2 px-4 bg-secondary text-primary font-bold' >Submit</button>}
+        {checkIfEmpty(content) && <button onClick={onSubmit} className='py-2 px-4 bg-secondary text-primary font-bold' >{loading ? "Sending......" : "Submit"}</button>}
     </div>
   )
 }

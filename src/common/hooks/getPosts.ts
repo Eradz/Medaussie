@@ -10,7 +10,6 @@ const getPosts = async({setLoading, setPosts, type}: {setLoading: setLoadingStat
       credentials: "include",
       dedupeStrategy: "none",
       onSuccess:({ data }) => {
-        toast.success(data.message)
         setPosts(data.data);
         setLoading(false);
       },

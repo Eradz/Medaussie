@@ -8,7 +8,7 @@ const menuItems =  [
   {name: "About", link:"/about"},
   {name: "Exams", link:"/exam"},
   {name: "Licensing", link:"/license"},
-  {name: "Resources", link:"/resources"},
+  {name: "Legal", link:"/legal"},
 ]
 const register =  [
   {name: "Signup", link:"/signup"},
