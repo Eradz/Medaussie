@@ -64,7 +64,7 @@ const toolBarElements = [
       formData.append('excerpt', content.excerpt.trim())
       formData.append('body', content.body)
       formData.append('file', content.featuredImage as File)
-      await callApi<{message: string, data: string}>(process.env.NEXT_PUBLIC_NEXT_ENV === "development" ? `http://localhost:5000/api/v1/post${type()}` : `https://medaussie-backend.onrender.com/api/v1/post${type()}1`, {
+      await callApi<{message: string, data: string}>(process.env.NEXT_PUBLIC_NEXT_ENV === "development" ? `http://localhost:5000/api/v1/post${type()}` : `https://medaussie-backend.onrender.com/api/v1/post${type()}`, {
         method: 'POST',
         body: formData,
         credentials: "include",
