@@ -43,7 +43,7 @@ const List = ({data, top}: {data: postType[] | userType[], top: listTopType[] })
         <div className={top[3].name === "Email" ? 'hidden' : "w-[30%] p-4 text-ellipsis overflow-hidden"}>{`${user.body.slice(3, 30)}...`}</div>
         <div className='w-[10%] p-4 text-ellipsis overflow-hidden'>{user.author.firstname}</div>
         <div className= {top[3].name === "Email" ? "w-[15%] pl-6 pr-4 text-center flex justify-between" :'w-[12%] text-center flex justify-between'}>
-          <Link href={`${pathName}/${user._id}`}>
+          <Link href={`${pathName}/${user.slug}`}>
           <EditIcon className='hover:cursor-pointer text-green-400'/>
           </Link>
           <Trash2Icon onClick={()=>clickDelete(`post/${user._id}`)} className='hover:cursor-pointer text-red-400'/>

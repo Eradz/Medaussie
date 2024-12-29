@@ -39,8 +39,8 @@ function EditExam({ paramId }: { paramId: string }) {
         data: postType;
       }>(
         process.env.NEXT_PUBLIC_NEXT_ENV === "development"
-          ? `/api/v1/post/${paramId}`
-          : `https://medaussie-backend.onrender.com/api/v1/post/${paramId}`,
+          ? `/api/v1/post/${paramId}?type=exam`
+          : `https://medaussie-backend.onrender.com/api/v1/post/${paramId}?type=exam`,
         {
           credentials: "include",
           dedupeStrategy: "none",

@@ -11,6 +11,7 @@ export const HandleDelete = async({setIsDeletePopupOpen, deleteData}: {setIsDele
       dedupeStrategy: "none",
       onSuccess:({ data }) => {
         toast.success(data.message)
+        window.location.href = window.location.href;
       },
       onError:({ error }) => {
         if(error.message === "Access token is required"){
