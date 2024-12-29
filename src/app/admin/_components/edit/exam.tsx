@@ -22,7 +22,6 @@ function EditExam({ paramId }: { paramId: string }) {
   const [body, setBody] = useState("");
   const [featuredImage, setFeaturedImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  
   useEffect(() => {
     if (paramId.includes("new")) {
       setTitle("");
@@ -39,8 +38,8 @@ function EditExam({ paramId }: { paramId: string }) {
         data: postType;
       }>(
         process.env.NEXT_PUBLIC_NEXT_ENV === "development"
-          ? `/api/v1/post/${paramId}`
-          : `https://medaussie-backend.onrender.com/api/v1/post/${paramId}`,
+          ? `/api/v1/post/${paramId}?type=exam`
+          : `https://medaussie-backend.onrender.com/api/v1/post/${paramId}?type=exam`,
         {
           credentials: "include",
           dedupeStrategy: "none",
@@ -58,7 +57,7 @@ function EditExam({ paramId }: { paramId: string }) {
         }
       );
     };
-    getPost();
+    getPost()
   }, [paramId]);
   if(loading){
     return <Loading/>
