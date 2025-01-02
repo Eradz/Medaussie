@@ -23,7 +23,7 @@ function Mobilenav() {
   };
 
   return (
-    <div className="bg-primary md:hidden flex px-8 py-4 ">
+    <div className="bg-primary lg:hidden flex px-8 py-4 ">
       <div className="flex w-full items-center justify-between">
       <Link href="/">
           <p className="font-bold text-secondary text-[18px]"><i>Medaussie</i></p>

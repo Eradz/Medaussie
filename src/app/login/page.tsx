@@ -3,12 +3,11 @@
 import React, {useState} from 'react'
 import Link from "next/link"
 import GoogleIcon from '../../../components/icons/GoogleIcon';
-import EyeHideIcon from '../../../components/icons/EyeHideIcon';
-import EyeShowIcon from '../../../components/icons/EyeShowIcon';
 import { toast } from 'sonner'
 import { callApi } from '@zayne-labs/callapi';
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/components/context/UserContext'
+import { EyeClosed, EyeIcon } from 'lucide-react';
 
 const Page = () => {
     const [email, setEmail] = useState("");
@@ -19,7 +18,7 @@ const Page = () => {
     const { user, setUser } = UserContext()
     const details = [
         {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
-        {type: "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
+        {type: showPassword ? "text" : "password", name: "Password", placeholder: "Enter your Password", value: password, edit: (value: string)=>{setPassword(value)}},
     ]
     const data = {email: email.toLowerCase(), password}
     const handleSubmit = async () => {
@@ -61,17 +60,22 @@ const Page = () => {
                 return (     
               <div className= 'w-full' key={name}>
                    <label className="text-[14px]">{name}</label>
+                   <div className='relative bg-red-500'>
                    <input 
                    type={type}
                    name={name}
-                   className={"relative w-full p-3 rounded-lg border-[1px] border-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 " }
+                   className={"w-full p-3 rounded-lg border-[1px] border-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 " }
                    placeholder={placeholder}
                    value={value}
                    onChange={(e)=>edit(e.target.value)}
-                   ></input>
-                   {
-                    showPassword ? <EyeHideIcon onClick={()=> setShowPassword(false)} className={i > 0 ? 'absolute right-5 top-[50%]' : "hidden"}/> : <EyeShowIcon onClick={()=> setShowPassword(true)} className={i > 2 ? 'absolute right-5 top-[50%]' : "hidden"}/>
-                   }
+                   >
+                    
+                   </input>
+                 
+                    {i > 0 && <EyeClosed onClick={()=> setShowPassword(false)} className= { showPassword ? 'absolute right-5 top-3' : "hidden"}/> }
+                    { i > 0 && <EyeIcon onClick={()=> setShowPassword(true)} className= { showPassword ? "hidden" : 'absolute right-5 top-3'}/>}
+                   
+                   </div>
                 </div>
                 )
             })}

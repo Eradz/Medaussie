@@ -5,9 +5,9 @@ import { callApi } from "@zayne-labs/callapi";
 import { toast } from "sonner";
 import { userType } from "@/common/types/types";
 import Loading from "@/app/loading";
+import { updateUser } from "@/common/hooks/updateUser";
 
 function EditUser({paramId} :{paramId:string}) {
-  // const [user, setUser] = useState<{ firstname: string, lastname: string, email: string, role: string, _id:string}>({firstname: "", lastname: "", email: "", role: "", _id: ""})
   const [email, setEmail] = useState("")
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
@@ -21,7 +21,6 @@ function EditUser({paramId} :{paramId:string}) {
         credentials: "include",
         dedupeStrategy: "none",
         onSuccess:({ data }) => {
-          // setUser(data.data);
           setEmail(()=>data.data.email);
           setFirstname(()=>data.data.firstname);
           setLastname(()=>data.data.lastname);
@@ -38,6 +37,11 @@ function EditUser({paramId} :{paramId:string}) {
     
     }, [paramId])
 
+    const handleUpdate = () => {
+      const updatedUser = {firstname, lastname, role}
+      console.log(updatedUser)
+     return updateUser({id: paramId, updatedUser, loading:(e)=> setLoading(e) })
+    }
 
    const details = [
     {type: "email", name: "Email", placeholder: "Enter your Email", value: email, edit: (value: string)=>{setEmail(value)}},
@@ -45,12 +49,12 @@ function EditUser({paramId} :{paramId:string}) {
     {type: "text", name: "Lastname", placeholder: "Enter your Lastname", value: lastname, edit: (value: string)=>{setLastname(value)}},
     {type: "text", name: "Role", placeholder: "Admin/user", value: role, edit: (value: string)=>{setRole(value)}}
 ]
+const options = ['admin', 'user']
 if(loading){
   return (
     <Loading/>
   )
- } else {
-}
+ }
   return (  
         <div className="lg:flex-1 px-4 bg-primary justify-center items-center">
           <form className="flex flex-wrap justify-between w-[100%]">
@@ -58,6 +62,13 @@ if(loading){
                 return (     
               <div className= 'w-full relative' key={name}>
                  <label className="text-[14px]">{name}</label>
+                   { name === "Role" ?  <select defaultValue={role} onChange={(e)=>edit(e.target.value)} className={"w-full p-3 rounded-lg border-solid border-secondary border-[1px] focus:outline-none focus:ring-2 focus:ring-blue-500 relative" }>
+                    {options?.map((option)=>{
+                        return (
+                            <option value={option} key={option} >{option}</option>
+                        )
+                    })}
+                  </select>:
                    <input 
                    type={type}
                    name={name}
@@ -65,7 +76,8 @@ if(loading){
                    placeholder={placeholder}
                    value={value}
                    onChange={(e)=>edit(e.target.value)}
-                   ></input>
+                   disabled={name === "Email"}
+                   ></input>}
                 </div>
                 )
             })}
@@ -73,7 +85,8 @@ if(loading){
           <div className="py-6 flex flex-col justify-center items-center gap-4 w-[90%]">
           <button
               type="submit"
-              className="text-white bg-success400 w-[80%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium"
+              className="text-white bg-secondary w-[80%] py-[8px] px-[16px] rounded-[8px] font-sans font-medium"
+              onClick={handleUpdate}
             >
              <p>Submit</p>
             </button>
