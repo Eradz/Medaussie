@@ -60,7 +60,7 @@ const Page = () => {
                 return (     
               <div className= 'w-full' key={name}>
                    <label className="text-[14px]">{name}</label>
-                   <div className='relative bg-red-500'>
+                   <div className='relative'>
                    <input 
                    type={type}
                    name={name}
